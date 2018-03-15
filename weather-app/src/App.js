@@ -7,6 +7,16 @@ import Weather from "./components/Weather";
 const API_KEY ="64177909d5005a429e0fe82724b7bd94";
 
 class App extends React.Component {
+
+  state = {
+      temperature: undefined,
+      city: undefined,
+      country: undefined,
+      humidity: undefined,
+      description: undefined,
+      error: undefined
+  }
+
   getWeather = async (e) => {
     e.preventDefault();
     const city = e.target.elements.city.value;
@@ -17,6 +27,15 @@ class App extends React.Component {
     const data = await api_call.json();
     console.log(data);
 
+    this.setState({
+        temprature: data.main.temp,
+        city: data.name,
+        country: data.sys.country,
+        humidity: data.main.humidity,
+        description:data.weather[0].description,
+        error:""
+    })
+
   }
 
   render() {
@@ -24,7 +43,14 @@ class App extends React.Component {
       <div>
         <Titles/>
         <Form getWeather={this.getWeather}/>
-        <Weather/>
+        <Weather
+          temprature={this.state.temperature}
+          city={this.state.city}
+          country={this.state.country}
+          humidity={this.state.humidity}
+          description={this.state.description}
+          error={this.state.error}
+        />
       </div>
     );
   }
