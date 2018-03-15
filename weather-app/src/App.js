@@ -26,9 +26,10 @@ class App extends React.Component {
       API_KEY}&units=metric`);
     const data = await api_call.json();
     console.log(data);
+    console.log(data.main.temp);
 
     this.setState({
-        temprature: data.main.temp,
+        temperature: data.main.temp,
         city: data.name,
         country: data.sys.country,
         humidity: data.main.humidity,
