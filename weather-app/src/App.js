@@ -28,8 +28,6 @@ class App extends React.Component {
 
     if(city && country){
         console.log(data);
-        console.log(data.main.temp);
-
         this.setState({
             temperature: data.main.temp,
             city: data.name,
@@ -37,7 +35,16 @@ class App extends React.Component {
             humidity: data.main.humidity,
             description:data.weather[0].description,
             error:""
-        })
+        });
+    }else {
+        this.setState({
+            temperature: undefined,
+            city: undefined,
+            country: undefined,
+            humidity: undefined,
+            description: undefined,
+            error:" Please enter the values."
+        });
     }
 
   }
